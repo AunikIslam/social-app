@@ -1,0 +1,20 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/user-login.css">
+</head>
+
+<div class="login-container">
+    <form action="/user/login" method="post">
+        <input class="input-field" type="text" name="email" value="<%= user.email%>"
+               placeholder="Email">
+
+        <input class="input-field" type="password" name="password" value="<%= user.password%>"
+               placeholder="Password">
+
+        <button type="submit" class="button">
+            Log In
+        </button>
+        <div>
+            <a href="/user/sign-up">Do not have an account? Sign up</a>
+        </div>
+    </form>
+</div>
