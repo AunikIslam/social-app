@@ -23,7 +23,7 @@ exports.signUpUser = (req, res, next) => {
         }
     }).then((users) => {
         if (users.length > 0) {
-
+            return res.json({duplicateUser: true})
         } else {
             return User.create({
                 firstName: req.body.firstName,
@@ -34,7 +34,6 @@ exports.signUpUser = (req, res, next) => {
         }
     })
     .then((user) => {
-        console.log(user);
     });
 }
 

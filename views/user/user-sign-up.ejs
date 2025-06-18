@@ -3,7 +3,7 @@
 </head>
 
 <div class="login-container">
-    <form action="/user/sign-up" method="post">
+    <form id="signupForm" action="/user/sign-up" method="post">
         <input class="input-field" type="text" name="firstName" value="<%= user.firstName%>"
                placeholder="First Name">
 
@@ -21,6 +21,42 @@
         </button>
 
         <a href="/user/login">Already a user? Log in</a>
-
     </form>
 </div>
+
+<div id="errorModal" class="modal-container">
+    <div class="modal-content">
+        <div>User already exists</div>
+        <div>User already exists</div>
+        <div>User already exists</div>
+        <div>User already exists</div>
+        <div>User already exists</div>
+        <div>User already exists</div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('signupForm');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        try {
+            const response = await fetch('/user/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if (result.duplicateUser) {
+                const modal = document.getElementById('errorModal');
+                modal.style.display = 'flex';
+            }
+        } catch (error) {
+
+        }
+    })
+</script>

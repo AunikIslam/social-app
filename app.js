@@ -10,6 +10,7 @@ const PostTag = require('./models/post-tag');
 const userRoutes = require('./routes/user-routes');
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/user', userRoutes);
 
@@ -35,5 +36,5 @@ sequelize
         app.listen(3002);
     })
     .catch((err) => {
-        console.log('Errror Occured')
+        console.log('Error Occured')
     })
